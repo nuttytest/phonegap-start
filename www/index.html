@@ -43,7 +43,7 @@
     </body>
 </html>
 -->
-
+<!--
 <html>
   <head>
 
@@ -111,6 +111,67 @@
         alert('Lat: ' + position.coords.latitude + ' ' +
               'Lon: ' + position.coords.longitude);
         }
+    </script>
+  </body>
+</html>
+-->
+html>
+  <head>
+
+  </head>
+  <body>
+    <div>
+      <button id="btnInit" >Monitor my location</button>
+      <button id="btnStop" >Stop monitoring</button>
+    </div>
+    <div id="info"></div>
+	
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+        jQuery(window).ready(function(){
+            jQuery("#btnInit").click(initiate_watchlocation);
+            jQuery("#btnStop").click(stop_watchlocation);
+        });
+        var watchProcess = null;
+		function initiate_watchlocation() {
+			if (watchProcess == null) {
+				watchProcess = navigator.geolocation.watchPosition(handle_geolocation_query, handle_errors);
+			}
+		}
+		function stop_watchlocation() {
+			if (watchProcess != null)
+			{
+				navigator.geolocation.clearWatch(watchProcess);
+				watchProcess = null;
+			}
+		}
+        function handle_errors(error)
+        {
+            switch(error.code)
+            {
+                case error.PERMISSION_DENIED: alert("user did not share geolocation data");
+                break;
+                case error.POSITION_UNAVAILABLE: alert("could not detect current position");
+                break;
+                case error.TIMEOUT: alert("retrieving position timedout");
+                break;
+                default: alert("unknown error");
+                break;
+            }
+        }
+		function handle_geolocation_query(position) {
+			var text = "Latitude: "  + position.coords.latitude  + "<br/>" +
+					   "Longitude: " + position.coords.longitude + "<br/>" +
+					   "Accuracy: "  + position.coords.accuracy  + "m<br/>" +
+					   "Time: " + new Date(position.timestamp);
+			$("#info").html(text);
+			var image_url = "http://maps.google.com/maps/api/staticmap?sensor=false&center=" + position.coords.latitude + ',' + position.coords.longitude +
+							"&zoom=14&size=300x400&markers=color:blue|label:S|" + position.coords.latitude + ',' + position.coords.longitude;
+			$("#map").remove();
+			$(document.body).append(
+				$(document.createElement("img")).attr("src", image_url).attr('id','map')
+			);
+		}
     </script>
   </body>
 </html>
