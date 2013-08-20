@@ -124,6 +124,17 @@
   <head>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/> 
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"/> 
+
+  <style>
+  	
+  	      #map-canvas {
+        display: block;
+        margin: 20px auto;
+        height: 400px;
+        width: 280px;
+        background-color: #ccc;
+      }
+  </style>
   </head>
   <body>
     <div>
@@ -181,9 +192,9 @@
 				$(document.createElement("img")).attr("src", image_url).attr('id','map')
 			);
 			
-			$("#map-canvas").css("display", "block");
-			$("#map-canvas").css("height", "400px");
-			$("#map-canvas").css("width","280px");
+			//$("#map-canvas").css("display", "block");
+			//$("#map-canvas").css("height", "400px");
+			//$("#map-canvas").css("width","280px");
 			var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 			var mapOptions = {
 								  zoom: 14,
