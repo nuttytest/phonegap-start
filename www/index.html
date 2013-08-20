@@ -122,7 +122,8 @@
 
 <html>
   <head>
-
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/> 
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/> 
   </head>
   <body>
     <div>
@@ -130,9 +131,10 @@
       <button id="btnStop" >Stop monitoring</button>
     </div>
     <div id="info"></div>
+    <div id="map-canvas"></div>
 	<script type="text/javascript" src="js/jquery.js"></script>
   	<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  		
+  	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script> 	
 	 
      <script type="text/javascript">
         $(document).ready(function(){
@@ -176,8 +178,29 @@
 							"&zoom=14&size=280x400&markers=color:blue|label:S|" + position.coords.latitude + ',' + position.coords.longitude;
 			$("#map").remove();
 			$(document.body).append(
-				$(document.createElement("img")).attr("src", image_url).attr('id','map');
+				$(document.createElement("img")).attr("src", image_url).attr('id','map')
 			);
+			
+			$("#map-canvas").css("display", "block");
+			$("#map-canvas").css("height", "400px");
+			$("#map-canvas").css("width","280px");
+			var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+			var mapOptions = {
+								  zoom: 14,
+								  center: latlng,
+								  mapTypeId: google.maps.MapTypeId.ROADMAP
+					};
+			var maps = new google.maps.Map(
+							   document.getElementById('map-canvas'),
+							   mapOptions
+						 );			
+			var marker = new google.maps.Marker({
+								position: latlng,
+								map: maps,
+								animation: google.maps.Animation.DROP,
+								title: "Welcome to Thailand"
+							});
+			
 		}
     </script>
   </body>
