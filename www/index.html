@@ -46,11 +46,19 @@
 
 <html>
   <head>
-  <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js"></script>
-  <script src="js/yqlgeo.js"></script>
-  <script>
-    jQuery(window).ready(function(){
-        jQuery("#btnInit").click(initiate_geolocation);
+
+  </head>
+  <body>
+    <div>
+      <button id="btnInit" >Find my location</button>
+    </div>
+	<script type="text/javascript" src="js/jquery.js"></script>
+  <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script type="text/javascript" src="js/yqlgeo.js"></script>
+ 
+  <script type="text/javascript">
+    $(document).ready(function(){
+        $("#btnInit").click(initiate_geolocation);
     })
     function initiate_geolocation() {
         if (navigator.geolocation)
@@ -104,11 +112,5 @@
               'Lon: ' + position.coords.longitude);
         }
     </script>
-  </head>
-  <body>
-    <div>
-      <button id="btnInit" >Find my location</button>
-    </div>
   </body>
 </html>
-
