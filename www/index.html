@@ -128,9 +128,9 @@
 	
     <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>
-        jQuery(window).ready(function(){
-            jQuery("#btnInit").click(initiate_watchlocation);
-            jQuery("#btnStop").click(stop_watchlocation);
+        $(document).ready(function(){
+            $("#btnInit").click(initiate_watchlocation);
+            $("#btnStop").click(stop_watchlocation);
         });
         var watchProcess = null;
 		function initiate_watchlocation() {
